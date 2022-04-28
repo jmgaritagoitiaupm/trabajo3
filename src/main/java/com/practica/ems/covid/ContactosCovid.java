@@ -48,8 +48,6 @@ public class ContactosCovid {
 		this.localizacion = localizacion;
 	}
 	
-	
-
 	public ListaContactos getListaContactos() {
 		return listaContactos;
 	}
