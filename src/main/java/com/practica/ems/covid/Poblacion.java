@@ -75,9 +75,7 @@ public class Poblacion {
 	        // Códifo postal
 	        System.out.printf("%s,%s;", lista.get(i).getDireccion(), lista.get(i).getCp());	        
 	        // Fecha de nacimiento
-	        System.out.printf("%02d/%02d/%04d\n", fecha.getFecha().getDia(), 
-	         fecha.getFecha().getMes(), 
-	         fecha.getFecha().getAnio());	        
+	        System.out.printf("%02d/%02d/%04d\n", fecha.getFecha().getDia(), fecha.getFecha().getMes(), fecha.getFecha().getAnio());	        
 	    }
 	}
 
