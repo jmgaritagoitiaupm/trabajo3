@@ -46,3 +46,6 @@ out/
 *.iml
 *.ipr
 *.iws
+
+# Excluding pdm files
+*pmd*
