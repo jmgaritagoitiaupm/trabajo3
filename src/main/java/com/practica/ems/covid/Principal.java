@@ -8,7 +8,6 @@ import com.practica.genericas.FechaHora;
 
 public class Principal {
 	
-	
 	public static void main(String[] args) throws EmsDuplicatePersonException, EmsDuplicateLocationException, EmsInvalidTypeException, EmsInvalidNumberOfDataException {
 		ContactosCovid contactosCovid = new ContactosCovid();
 		contactosCovid.loadDataFile("datos2.txt", false);

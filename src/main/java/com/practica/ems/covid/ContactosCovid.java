@@ -61,6 +61,7 @@ public class ContactosCovid {
 		this.localizacion = new Localizacion();
 		this.listaContactos = new ListaContactos();
 	}
+	
 	public void loadData(String data, boolean reset) throws EmsInvalidTypeException, EmsInvalidNumberOfDataException,
 			EmsDuplicatePersonException, EmsDuplicateLocationException {
 		if (reset) {this.reseter();}
