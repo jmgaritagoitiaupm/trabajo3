@@ -35,7 +35,7 @@ public class Poblacion {
 	}
 	
 	public void delPersona(String documento) throws EmsPersonNotFoundException {
-		int pos;
+		int pos=-1;
 		try {
 			pos = findPersona(documento);
 		} catch (EmsPersonNotFoundException e) {

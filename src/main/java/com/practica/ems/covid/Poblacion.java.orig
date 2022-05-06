@@ -35,7 +35,16 @@ public class Poblacion {
 	}
 	
 	public void delPersona(String documento) throws EmsPersonNotFoundException {
+<<<<<<< HEAD
 		int pos;
+		/**
+		 * Busca la persona por documento, en caso de encontrarla
+		 * devuelve la posición dentro de la lista, sino está lanza
+		 * una excepción
+		 */
+=======
+		int pos=-1;
+>>>>>>> main
 		try {
 			pos = findPersona(documento);
 		} catch (EmsPersonNotFoundException e) {

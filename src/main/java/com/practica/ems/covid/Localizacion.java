@@ -15,7 +15,7 @@ public class Localizacion {
 	public Localizacion() {
 		super();
 		this.lista = new LinkedList<PosicionPersona>();
-	};
+	}
 	
 	public LinkedList<PosicionPersona> getLista() {
 		return lista;
@@ -41,26 +41,21 @@ public class Localizacion {
 	    	cont++;
 	    	PosicionPersona pp = it.next();
 	    	FechaHora fechaHora = this.parsearFecha(fecha, hora);
-	    	if(pp.getDocumento().equals(documento) && 
-	    	   pp.getFechaPosicion().equals(fechaHora)) {
+	    	if(pp.getDocumento().equals(documento) && pp.getFechaPosicion().equals(fechaHora)) {
 	    		return cont;
 	    	}
 	    } 
 	    throw new EmsLocalizationNotFoundException();
 	}
+	
 	public void delLocalizacion(String documento, String fecha, String hora) throws EmsLocalizationNotFoundException {
 	    int pos=-1;
-	    int i;
-	    /**
-	     *  Busca la localización, sino existe lanza una excepción
-	     */
 	    try {
 			pos = findLocalizacion(documento, fecha, hora);
 		} catch (EmsLocalizationNotFoundException e) {
 			throw new EmsLocalizationNotFoundException();
 		}
 	    this.lista.remove(pos);
-	    
 	}
 	
 	void printLocalizacion() {    
