@@ -1,6 +1,5 @@
 package com.practica.lista;
 
-import com.practica.genericas.Coordenada;
 import com.practica.genericas.FechaHora;
 import com.practica.genericas.PosicionPersona;
 
@@ -8,27 +7,19 @@ public class ListaContactos {
 	private NodoTemporal lista;
 	private int size;
 
-	/**
-	 * Insertamos en la lista de nodos temporales, y a la vez inserto en la lista de
-	 * nodos de coordenadas. En la lista de coordenadas metemos el documento de la
-	 * persona que está en esa coordenada en un instante
-	 */
 	@SuppressWarnings("null")
 	public void insertarNodoTemporal(PosicionPersona p) {
 		NodoTemporal aux = lista, ant = null;
-		boolean salir = false, encontrado = false;
-
-		while (aux != null && !salir) {
+		boolean encontrado = false;
+		while (aux != null && !encontrado && aux.getFecha().compareTo(p.getFechaPosicion()) <= 0) {
 			if (aux.getFecha().compareTo(p.getFechaPosicion()) == 0) {
 				encontrado = true;
-				salir = true;
-				extracted(p, aux);
+
+				nodoTemporalNuevo(p, aux);
 			} else if (aux.getFecha().compareTo(p.getFechaPosicion()) < 0) {
 				ant = aux;
 				aux = aux.getSiguiente();
-			} else if (aux.getFecha().compareTo(p.getFechaPosicion()) > 0) {
-				salir = true;
-			}
+			} 
 		}
 
 		if (!encontrado) {
@@ -50,12 +41,7 @@ public class ListaContactos {
 		}
 	}
 
-	private void extracted(PosicionPersona p, NodoTemporal aux) {
-		NodoPosicion npActual = aux.getListaCoordenadas();
-		NodoPosicion npAnt = null;
 
-		nodoTemporalNuevo(p, aux, npActual, npAnt);
-	}
 
 	private NodoTemporal nodoTemporalNoEncontrado(PosicionPersona p) {
 		NodoTemporal nuevo = new NodoTemporal();
@@ -63,13 +49,16 @@ public class ListaContactos {
 
 		NodoPosicion npActual = nuevo.getListaCoordenadas();
 		NodoPosicion npAnt = null;
-		if (!npEncontrado(npActual, p.getCoordenada())) {
+
+		if (npActual == null  || !npActual.npEncontrado(p.getCoordenada())) {
 			nodoFuncion1(p, nuevo, npAnt);
 		}
 		return nuevo;
 	}
 
-	private void nodoTemporalNuevo(PosicionPersona p, NodoTemporal aux, NodoPosicion npActual, NodoPosicion npAnt) {
+	private void nodoTemporalNuevo(PosicionPersona p, NodoTemporal aux) {
+		NodoPosicion npActual = aux.getListaCoordenadas();
+		NodoPosicion npAnt = null;
 		boolean npEncontrado = false;
 		while (npActual != null && !npEncontrado) {
 			if (npActual.getCoordenada().equals(p.getCoordenada())) {
@@ -93,33 +82,6 @@ public class ListaContactos {
 			npAnt.setSiguiente(npNuevo);
 	}
 
-	private boolean npEncontrado(NodoPosicion npActual, Coordenada p) {
-		boolean npEncontrado = false;
-		while (npActual != null && !npEncontrado) {
-			if (npActual.getCoordenada().equals(p)) {
-				npEncontrado = true;
-				npActual.setNumPersonas(npActual.getNumPersonas() + 1);
-			} else {
-				npActual = npActual.getSiguiente();
-			}
-		}
-		return npEncontrado;
-	}
-
-	public int personasEnCoordenadas() {
-		NodoPosicion aux = this.lista.getListaCoordenadas();
-		if (aux == null)
-			return 0;
-		else {
-			int cont;
-			for (cont = 0; aux != null;) {
-				cont += aux.getNumPersonas();
-				aux = aux.getSiguiente();
-			}
-			return cont;
-		}
-	}
-
 	public int tamanioLista() {
 		return this.size;
 	}
@@ -131,11 +93,6 @@ public class ListaContactos {
 		return cadena;
 	}
 
-	/**
-	 * Métodos para comprobar que insertamos de manera correcta en las listas de
-	 * coordenadas, no tienen una utilidad en sí misma, más allá de comprobar que
-	 * nuestra lista funciona de manera correcta.
-	 */
 	public int numPersonasEntreDosInstantes(FechaHora inicio, FechaHora fin) {
 		if (this.size == 0)
 			return 0;
@@ -170,11 +127,10 @@ public class ListaContactos {
 				while (nodo != null) {
 					cont = cont + 1;
 					nodo = nodo.getSiguiente();
-				}
-				aux = aux.getSiguiente();
-			} else {
-				aux = aux.getSiguiente();
+				} 
 			}
+				aux = aux.getSiguiente();
+			
 		}
 		return cont;
 	}
