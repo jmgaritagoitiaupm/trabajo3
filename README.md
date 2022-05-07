@@ -1,4 +1,4 @@
-:point_right: PUT YOUR CI BADGE HERE
+[![BCH compliance](https://bettercodehub.com/edge/badge/ETSISI-EMS/ems2022_lab_3_mantenibilidad_iwt31-grupoiwt31_01?branch=main&token=7ce5461cab402fee729e6b256ae79e78bf70a7f9)](https://bettercodehub.com/)
 :point_right: PUT YOUR SCOREBOARD BADGE HERE
 
 # EMS-lab3 Maintainability
