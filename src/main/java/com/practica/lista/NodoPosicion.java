@@ -47,5 +47,18 @@ public class NodoPosicion {
 	public void setSiguiente(NodoPosicion siguiente) {
 		this.siguiente = siguiente;
 	}
+	public boolean npEncontrado(Coordenada p) {
+		boolean npEncontrado = false;
+		NodoPosicion next = this;
+		while (next != null && !npEncontrado) {
+			if (next.getCoordenada().equals(p)) {
+				npEncontrado = true;
+				setNumPersonas(next.getNumPersonas() + 1);
+			} else {
+				next = getSiguiente();
+			}
+		}
+		return npEncontrado;
+	}
 
 }
