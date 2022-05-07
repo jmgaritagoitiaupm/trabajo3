@@ -10,22 +10,16 @@ public class ListaContactos {
 	@SuppressWarnings("null")
 	public void insertarNodoTemporal(PosicionPersona p) {
 		NodoTemporal aux = lista, ant = null;
-		boolean encontrado = false;
-		while (aux != null && !encontrado && aux.getFecha().compareTo(p.getFechaPosicion()) <= 0) {
-			if (aux.getFecha().compareTo(p.getFechaPosicion()) == 0) {
-				encontrado = true;
-
-				nodoTemporalNuevo(p, aux);
-			} else if (aux.getFecha().compareTo(p.getFechaPosicion()) < 0) {
+		while (aux != null && aux.getFecha().compareTo(p.getFechaPosicion()) < 0) {
 				ant = aux;
 				aux = aux.getSiguiente();
-			} 
 		}
-
-		if (!encontrado) {
+		if (aux != null && aux.getFecha().compareTo(p.getFechaPosicion()) == 0) {
+			nodoTemporalNuevo(p, aux);
+		}
+		else {
 			insertarNodoNoEncontrado(p, aux, ant);
 			this.size++;
-
 		}
 	}
 
@@ -40,7 +34,6 @@ public class ListaContactos {
 			lista = nuevo;
 		}
 	}
-
 
 
 	private NodoTemporal nodoTemporalNoEncontrado(PosicionPersona p) {
@@ -59,21 +52,15 @@ public class ListaContactos {
 	private void nodoTemporalNuevo(PosicionPersona p, NodoTemporal aux) {
 		NodoPosicion npActual = aux.getListaCoordenadas();
 		NodoPosicion npAnt = null;
-		boolean npEncontrado = false;
-		while (npActual != null && !npEncontrado) {
-			if (npActual.getCoordenada().equals(p.getCoordenada())) {
-				npEncontrado = true;
-				npActual.setNumPersonas(npActual.getNumPersonas() + 1);
-			} else {
+		while (npActual != null && !npActual.getCoordenada().equals(p.getCoordenada())) {
+
 				npAnt = npActual;
 				npActual = npActual.getSiguiente();
-			}
 		}
-		if (!npEncontrado) {
-			nodoFuncion1(p, aux, npAnt);
-		}
+		if (npActual != null && npActual.getCoordenada().equals(p.getCoordenada())) npActual.setNumPersonas(npActual.getNumPersonas() + 1);
+		else nodoFuncion1(p, aux, npAnt);
 	}
-
+	
 	private void nodoFuncion1(PosicionPersona p, NodoTemporal nuevo, NodoPosicion npAnt) {
 		NodoPosicion npNuevo = new NodoPosicion(p.getCoordenada(), 1, null);
 		if (nuevo.getListaCoordenadas() == null)
@@ -100,15 +87,14 @@ public class ListaContactos {
 		int cont = 0;
 		while (aux != null) {
 			if (aux.getFecha().compareTo(inicio) >= 0 && aux.getFecha().compareTo(fin) <= 0) {
-				cont = contadorNodo(cont, aux.getListaCoordenadas());
+				cont = contadorPersonas(cont, aux.getListaCoordenadas());
 			}
 			aux = aux.getSiguiente();
-
 		}
 		return cont;
 	}
 
-	private int contadorNodo(int cont, NodoPosicion nodo) {
+	private int contadorPersonas(int cont, NodoPosicion nodo) {
 		while (nodo != null) {
 			cont = cont + nodo.getNumPersonas();
 			nodo = nodo.getSiguiente();
@@ -117,20 +103,22 @@ public class ListaContactos {
 	}
 
 	public int numNodosCoordenadaEntreDosInstantes(FechaHora inicio, FechaHora fin) {
-		if (this.size == 0)
-			return 0;
 		NodoTemporal aux = lista;
 		int cont = 0;
 		while (aux != null) {
 			if (aux.getFecha().compareTo(inicio) >= 0 && aux.getFecha().compareTo(fin) <= 0) {
-				NodoPosicion nodo = aux.getListaCoordenadas();
-				while (nodo != null) {
-					cont = cont + 1;
-					nodo = nodo.getSiguiente();
-				} 
+				cont = contadorCoordenadas(aux, cont); 
 			}
 				aux = aux.getSiguiente();
-			
+		}
+		return cont;
+	}
+
+	private int contadorCoordenadas(NodoTemporal aux, int cont) {
+		NodoPosicion nodo = aux.getListaCoordenadas();
+		while (nodo != null) {
+			cont = cont + 1;
+			nodo = nodo.getSiguiente();
 		}
 		return cont;
 	}
