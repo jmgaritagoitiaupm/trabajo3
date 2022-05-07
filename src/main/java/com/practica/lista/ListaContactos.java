@@ -64,7 +64,7 @@ public class ListaContactos {
 		
 		NodoPosicion npActual = nuevo.getListaCoordenadas();
 		NodoPosicion npAnt=null;	
-		if (!npEncontrado(npActual,npAnt,p.getCoordenada())) {		
+		if (!npEncontrado(npActual,p.getCoordenada())) {		
 			nodoFuncion1(p, nuevo, npAnt);			
 		}
 		return nuevo;
@@ -94,38 +94,17 @@ public class ListaContactos {
 			npAnt.setSiguiente(npNuevo);
 	}
 	
-	private boolean npEncontrado(NodoPosicion npActual,NodoPosicion npAnt, Coordenada p) {
+	private boolean npEncontrado(NodoPosicion npActual, Coordenada p) {
 		boolean npEncontrado = false;
 		while (npActual!=null && !npEncontrado) {
 			if(npActual.getCoordenada().equals(p)) {
 				npEncontrado=true;
 				npActual.setNumPersonas(npActual.getNumPersonas()+1);
 			}else {
-				npAnt = npActual;
 				npActual = npActual.getSiguiente();
 			}
 		}
 		return npEncontrado;
-	}
-	
-	private boolean buscarPersona (String documento, NodoPersonas nodo) {
-		NodoPersonas aux = nodo;
-		while(aux!=null) {
-			if(aux.getDocumento().equals(documento)) {
-				return true;				
-			}else {
-				aux = aux.getSiguiente();
-			}
-		}
-		return false;
-	}
-	
-	private void insertarPersona (String documento, NodoPersonas nodo) {
-		NodoPersonas aux = nodo, nuevo = new NodoPersonas(documento, null);
-		while(aux.getSiguiente()!=null) {				
-			aux = aux.getSiguiente();				
-		}
-		aux.setSiguiente(nuevo);		
 	}
 	
 	public int personasEnCoordenadas () {
@@ -207,8 +186,7 @@ public class ListaContactos {
 	@Override
 	public String toString() {
 		String cadena="";
-		int a,cont;
-		cont=0;
+		int cont;
 		NodoTemporal aux = lista;
 		for(cont=1; cont<size; cont++) {
 			cadena += aux.getFecha().getFecha().toString();
