@@ -64,8 +64,7 @@ public class ListaContactos {
 		
 		NodoPosicion npActual = nuevo.getListaCoordenadas();
 		NodoPosicion npAnt=null;	
-		if (!npEncontrado(npActual,npAnt,p.getCoordenada())) {
-		
+		if (!npEncontrado(npActual,npAnt,p.getCoordenada())) {		
 			nodoFuncion1(p, nuevo, npAnt);			
 		}
 		return nuevo;
