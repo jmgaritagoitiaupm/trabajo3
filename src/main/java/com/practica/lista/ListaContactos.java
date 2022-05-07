@@ -127,7 +127,7 @@ public class ListaContactos {
 	public String getPrimerNodo() {
 		NodoTemporal aux = lista;
 		String cadena = aux.getFecha().getFecha().toString();
-		cadena += ";" + aux.getFecha().getHora().toString();
+		cadena += ";" + aux.getFecha().getHoraFormatted();
 		return cadena;
 	}
 
@@ -186,11 +186,11 @@ public class ListaContactos {
 		NodoTemporal aux = lista;
 		for (cont = 1; cont < size; cont++) {
 			cadena += aux.getFecha().getFecha().toString();
-			cadena += ";" + aux.getFecha().getHora().toString() + " ";
+			cadena += ";" + aux.getFecha().getHoraFormatted() + " ";
 			aux = aux.getSiguiente();
 		}
 		cadena += aux.getFecha().getFecha().toString();
-		cadena += ";" + aux.getFecha().getHora().toString();
+		cadena += ";" + aux.getFecha().getHoraFormatted();
 		return cadena;
 	}
 

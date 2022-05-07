@@ -75,7 +75,9 @@ public class ContactosCovid {
 		String data;
 		try {
 			br = Files.newBufferedReader(Paths.get(fichero));
-			if (reset) {this.reseter();}
+			if (reset) {
+				this.reseter();
+			}
 			while ((data = br.readLine()) != null) {
 				this.dataLoader(data);
 			}
@@ -84,9 +86,8 @@ public class ContactosCovid {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 	}
-
 
 	public void dataLoader(String data) throws EmsInvalidTypeException, EmsInvalidNumberOfDataException,
 			EmsDuplicatePersonException, EmsDuplicateLocationException {

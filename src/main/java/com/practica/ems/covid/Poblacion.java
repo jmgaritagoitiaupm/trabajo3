@@ -64,7 +64,7 @@ public class Poblacion {
 	        System.out.printf("%s,%s;",lista.get(i).getApellidos(), lista.get(i).getNombre());	        
 	        System.out.printf("%s;", lista.get(i).getEmail());
 	        System.out.printf("%s,%s;", lista.get(i).getDireccion(), lista.get(i).getCp());	        
-	        System.out.printf("%02d/%02d/%04d\n", fecha.getFecha().getDia(), fecha.getFecha().getMes(), fecha.getFecha().getAnio());	        
+	        System.out.printf("%02d/%02d/%04d\n", fecha.getDia(), fecha.getMes(), fecha.getAnio());	        
 	    }
 	}
 
@@ -77,9 +77,9 @@ public class Poblacion {
 	        cadena+=String.format("%s,%s;",lista.get(i).getApellidos(), lista.get(i).getNombre());	        
 	        cadena+=String.format("%s;", lista.get(i).getEmail());
 	        cadena+=String.format("%s,%s;", lista.get(i).getDireccion(), lista.get(i).getCp());	        
-	        cadena+=String.format("%02d/%02d/%04d\n", fecha.getFecha().getDia(), 
-	        		fecha.getFecha().getMes(), 
-	        		fecha.getFecha().getAnio());
+	        cadena+=String.format("%02d/%02d/%04d\n", fecha.getDia(), 
+	        		fecha.getMes(), 
+	        		fecha.getAnio());
 		}
 		return cadena;
 	}

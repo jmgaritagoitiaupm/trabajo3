@@ -34,8 +34,8 @@ public class PosicionPersona {
 		String cadena = "";
 		cadena += String.format("%s;", getDocumento());
 		FechaHora fecha = getFechaPosicion();
-		cadena += String.format("%02d/%02d/%04d;%02d:%02d;", fecha.getFecha().getDia(), fecha.getFecha().getMes(),
-				fecha.getFecha().getAnio(), fecha.getHora().getHora(), fecha.getHora().getMinuto());
+		cadena += String.format("%02d/%02d/%04d;%02d:%02d;", fecha.getDia(), fecha.getMes(), fecha.getAnio(),
+				fecha.getHora(), fecha.getMinuto());
 		cadena += String.format("%.4f;%.4f\n", getCoordenada().getLatitud(), getCoordenada().getLongitud());
 
 		return cadena;
