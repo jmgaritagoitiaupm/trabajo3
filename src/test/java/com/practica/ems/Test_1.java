@@ -34,7 +34,6 @@ public class Test_1 {
 			contactosCovid.loadData(test_data_str, false);
 		} catch (EmsInvalidTypeException | EmsInvalidNumberOfDataException | EmsDuplicatePersonException
 				| EmsDuplicateLocationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
