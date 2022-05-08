@@ -57,6 +57,31 @@ public class ListaContactos {
 		FechaHora fecha = lista.getFecha();
 		return fecha.getFecha() + ";" + fecha.getHoraFormatted();
 	}
+<<<<<<< HEAD
+
+	public int numPersonasEntreDosInstantes(FechaHora inicio, FechaHora fin) {
+		FechaHora fecha;
+		if (this.size == 0)
+			return 0;
+		aux = lista;
+		int cont = 0;
+		while (aux != null) {
+			fecha = aux.getFecha();
+			if (fecha.compareTo(inicio) >= 0 && fecha.compareTo(fin) <= 0) {
+				cont = aux.getListaCoordenadas().contadorPersonas(cont);
+			}
+			aux = aux.getSiguiente();
+		}
+		return cont;
+	}
+
+	public int numNodosCoordenadaEntreDosInstantes(FechaHora inicio, FechaHora fin) {
+		aux = lista;
+		int cont = 0;
+		while (aux != null) {
+			if (aux.getFecha().compareTo(inicio) >= 0 && aux.getFecha().compareTo(fin) <= 0) {
+				cont = aux.contadorCoordenadas(cont);
+=======
 	
 	public int numElementosEntreDosInstantes(FechaHora inicio, FechaHora fin,boolean tipoElemento) {
 		if(tipoElemento == false) {
@@ -71,12 +96,15 @@ public class ListaContactos {
 					cont = aux.getListaCoordenadas().contadorPersonas(cont);
 				else
 					cont = aux.contadorCoordenadas(cont);
+>>>>>>> 6ae510756be979e789ff8127a427af5e4cb15d8a
 			}
 			aux = aux.getSiguiente();
 		}
 		return cont;
+		
 	}
 
+	
 	@Override
 	public String toString() {
 		FechaHora fecha;

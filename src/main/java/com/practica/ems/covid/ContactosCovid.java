@@ -24,11 +24,13 @@ public class ContactosCovid {
 	private Poblacion poblacion;
 	private Localizacion localizacion;
 	private ListaContactos listaContactos;
+	private FechaHora fechaHora;
 
 	public ContactosCovid() {
 		this.poblacion = new Poblacion();
 		this.localizacion = new Localizacion();
 		this.listaContactos = new ListaContactos();
+		this.fechaHora = new FechaHora();
 	}
 
 	public Poblacion getPoblacion() {
@@ -59,6 +61,7 @@ public class ContactosCovid {
 		this.poblacion = new Poblacion();
 		this.localizacion = new Localizacion();
 		this.listaContactos = new ListaContactos();
+		this.fechaHora = new FechaHora();
 	}
 
 	public void loadData(String data, boolean reset) throws EmsInvalidTypeException, EmsInvalidNumberOfDataException,
@@ -182,37 +185,17 @@ public class ContactosCovid {
 		persona.setEmail(data[4]);
 		persona.setDireccion(data[5]);
 		persona.setCp(data[6]);
-		persona.setFechaNacimiento(parsearFecha(data[7]));
+		persona.setFechaNacimiento(fechaHora.parsearFecha(data[7]));
 		return persona;
 	}
 
 	private PosicionPersona crearPosicionPersona(String[] data) {
 		PosicionPersona posicionPersona = new PosicionPersona();
 		posicionPersona.setDocumento(data[1]);
-		posicionPersona.setFechaPosicion(parsearFecha(data[2], data[3]));
+		posicionPersona.setFechaPosicion(fechaHora.parsearFecha(data[2], data[3]));
 		posicionPersona.setCoordenada(new Coordenada(Float.parseFloat(data[4]), Float.parseFloat(data[5])));
 		return posicionPersona;
 	}
 
-	private FechaHora parsearFecha(String fecha) {
-		int dia, mes, anio;
-		String[] valores = fecha.split("\\/");
-		dia = Integer.parseInt(valores[0]);
-		mes = Integer.parseInt(valores[1]);
-		anio = Integer.parseInt(valores[2]);
-		return new FechaHora(dia, mes, anio, 0, 0);
-	}
-
-	private FechaHora parsearFecha(String fecha, String hora) {
-		int dia, mes, anio;
-		String[] valores = fecha.split("\\/");
-		dia = Integer.parseInt(valores[0]);
-		mes = Integer.parseInt(valores[1]);
-		anio = Integer.parseInt(valores[2]);
-		int minuto, segundo;
-		valores = hora.split("\\:");
-		minuto = Integer.parseInt(valores[0]);
-		segundo = Integer.parseInt(valores[1]);
-		return new FechaHora(dia, mes, anio, minuto, segundo);
-	}
+	
 }

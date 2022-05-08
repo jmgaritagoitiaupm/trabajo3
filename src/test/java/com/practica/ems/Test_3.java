@@ -82,7 +82,7 @@ public class Test_3 {
 			EmsDuplicateLocationException {
 		FechaHora ini = new FechaHora(25, 5, 2021, 16, 30);
 		FechaHora fin = new FechaHora(25, 5, 2021, 16, 30);
-		assertEquals(contactosCovid.getListaContactos().numPersonasEntreDosInstantes(ini, fin), 4);
+		assertEquals(contactosCovid.getListaContactos().numElementosEntreDosInstantes(ini, fin,false), 4);
 	}
 
 	@DisplayName("Comprobamos el numero de personas entre dos instantes temporales")
@@ -91,7 +91,7 @@ public class Test_3 {
 			EmsDuplicateLocationException {
 		FechaHora ini = new FechaHora(25, 5, 2021, 16, 36);
 		FechaHora fin = new FechaHora(25, 5, 2021, 16, 36);
-		assertEquals(contactosCovid.getListaContactos().numPersonasEntreDosInstantes(ini, fin), 4);
+		assertEquals(contactosCovid.getListaContactos().numElementosEntreDosInstantes(ini, fin,false), 4);
 	}
 
 	@DisplayName("Comprobamos el numero de nodos coordenada entre dos instantes temporales")
@@ -100,7 +100,7 @@ public class Test_3 {
 			EmsDuplicateLocationException {
 		FechaHora ini = new FechaHora(25, 5, 2021, 16, 36);
 		FechaHora fin = new FechaHora(25, 5, 2021, 16, 36);
-		assertEquals(contactosCovid.getListaContactos().numNodosCoordenadaEntreDosInstantes(ini, fin), 3);
+		assertEquals(contactosCovid.getListaContactos().numElementosEntreDosInstantes(ini, fin,true), 3);
 	}
 
 	@DisplayName("Comprobamos el numero de nodos coordenada y el número de personas entre dos instantes temporales")
@@ -109,8 +109,8 @@ public class Test_3 {
 			EmsDuplicateLocationException {
 		FechaHora ini = new FechaHora(25, 5, 2021, 16, 30);
 		FechaHora fin = new FechaHora(25, 5, 2021, 18, 01);
-		assertEquals(contactosCovid.getListaContactos().numNodosCoordenadaEntreDosInstantes(ini, fin), 10);
-		assertEquals(contactosCovid.getListaContactos().numPersonasEntreDosInstantes(ini, fin), 16);
+		assertEquals(contactosCovid.getListaContactos().numElementosEntreDosInstantes(ini, fin,true), 10);
+		assertEquals(contactosCovid.getListaContactos().numElementosEntreDosInstantes(ini, fin,false), 16);
 	}
 
 	@DisplayName("Aniadimos un nuevo nodo coordenadas en una nodo temporal que existe")
@@ -119,8 +119,8 @@ public class Test_3 {
 			EmsDuplicateLocationException {
 		FechaHora ini = new FechaHora(25, 5, 2021, 16, 36);
 		FechaHora fin = new FechaHora(25, 5, 2021, 16, 36);
-		assertEquals(contactosCovid.getListaContactos().numNodosCoordenadaEntreDosInstantes(ini, fin), 3);
+		assertEquals(contactosCovid.getListaContactos().numElementosEntreDosInstantes(ini, fin,true), 3);
 		contactosCovid.loadData("LOCALIZACION;99998888X;25/05/2021;16:36;54.2256;32.1234", false);
-		assertEquals(contactosCovid.getListaContactos().numNodosCoordenadaEntreDosInstantes(ini, fin), 4);
+		assertEquals(contactosCovid.getListaContactos().numElementosEntreDosInstantes(ini, fin,true), 4);
 	}
 }
