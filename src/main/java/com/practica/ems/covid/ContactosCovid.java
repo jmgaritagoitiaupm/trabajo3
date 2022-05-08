@@ -175,7 +175,10 @@ public class ContactosCovid {
 	}
 
 	private Persona crearPersona(String[] data) {
-		return new Persona(data[2], data[3], data[1], data[4], data[5], FechaHora.parsearFecha(data[7]), data[6]);
+		Persona nuevaPersona = new Persona(data[2], data[3], data[1], data[4], data[5],
+				FechaHora.parsearFecha(data[7]));
+		nuevaPersona.setCp(data[6]);
+		return nuevaPersona;
 	}
 
 	private PosicionPersona crearPosicionPersona(String[] data) {

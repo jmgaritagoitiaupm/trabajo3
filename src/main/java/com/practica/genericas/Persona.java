@@ -9,7 +9,7 @@ public class Persona {
 	}
 
 	public Persona(String nombre, String apellidos, String documento, String email, String direccion,
-			FechaHora fechaNacimiento, String cp) {
+			FechaHora fechaNacimiento) {
 		super();
 		this.nombre = nombre;
 		this.apellidos = apellidos;
@@ -17,7 +17,6 @@ public class Persona {
 		this.email = email;
 		this.direccion = direccion;
 		this.fechaNacimiento = fechaNacimiento;
-		this.cp = cp;
 	}
 
 	public String getNombre() {
