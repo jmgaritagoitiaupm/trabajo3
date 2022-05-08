@@ -17,7 +17,7 @@ public class ListaContactos {
 			aux = aux.getSiguiente();
 		}
 		if (aux != null && aux.getFecha().compareTo(p.getFechaPosicion()) == 0) {
-			nodoTemporalNuevo(p, aux);
+			aux.nodoTemporalNuevo(p);
 		} else {
 			insertarNodoNoEncontrado(p, aux, ant);
 			this.size++;
@@ -44,30 +44,9 @@ public class ListaContactos {
 		NodoPosicion npAnt = null;
 
 		if (npActual == null || !npActual.npEncontrado(p.getCoordenada())) {
-			nodoFuncion1(p, aux, npAnt);
+			aux.nodoFuncion1(p, aux, npAnt);
 		}
 		return aux;
-	}
-
-	private void nodoTemporalNuevo(PosicionPersona p, NodoTemporal aux) {
-		NodoPosicion npActual = aux.getListaCoordenadas();
-		NodoPosicion npAnt = null;
-		while (npActual != null && !npActual.getCoordenada().equals(p.getCoordenada())) {
-			npAnt = npActual;
-			npActual = npActual.getSiguiente();
-		}
-		if (npActual != null)
-			npActual.setNumPersonas(npActual.getNumPersonas() + 1);
-		else
-			nodoFuncion1(p, aux, npAnt);
-	}
-
-	private void nodoFuncion1(PosicionPersona p, NodoTemporal nuevo, NodoPosicion npAnt) {
-		NodoPosicion npNuevo = new NodoPosicion(p.getCoordenada(), 1, null);
-		if (nuevo.getListaCoordenadas() == null)
-			nuevo.setListaCoordenadas(npNuevo);
-		else
-			npAnt.setSiguiente(npNuevo);
 	}
 
 	public int tamanioLista() {
@@ -75,19 +54,19 @@ public class ListaContactos {
 	}
 
 	public String getPrimerNodo() {
-		aux = lista;
-		String cadena = aux.getFecha().getFecha().toString();
-		cadena += ";" + aux.getFecha().getHoraFormatted();
-		return cadena;
+		FechaHora fecha = lista.getFecha();
+		return fecha.getFecha() + ";" + fecha.getHoraFormatted();
 	}
 
 	public int numPersonasEntreDosInstantes(FechaHora inicio, FechaHora fin) {
+		FechaHora fecha;
 		if (this.size == 0)
 			return 0;
 		aux = lista;
 		int cont = 0;
 		while (aux != null) {
-			if (aux.getFecha().compareTo(inicio) >= 0 && aux.getFecha().compareTo(fin) <= 0) {
+			fecha = aux.getFecha();
+			if (fecha.compareTo(inicio) >= 0 && fecha.compareTo(fin) <= 0) {
 				cont = aux.getListaCoordenadas().contadorPersonas(cont);
 			}
 			aux = aux.getSiguiente();
@@ -109,12 +88,14 @@ public class ListaContactos {
 
 	@Override
 	public String toString() {
+		FechaHora fecha;
 		String cadena = "";
 		int cont;
 		aux = lista;
 		for (cont = 1; cont < size; cont++) {
-			cadena += aux.getFecha().getFecha().toString();
-			cadena += ";" + aux.getFecha().getHoraFormatted() + " ";
+			fecha = aux.getFecha();
+			cadena += fecha.getFecha();
+			cadena += ";" + fecha.getHoraFormatted() + " ";
 			aux = aux.getSiguiente();
 		}
 		cadena += aux.getFecha().getFecha().toString();
