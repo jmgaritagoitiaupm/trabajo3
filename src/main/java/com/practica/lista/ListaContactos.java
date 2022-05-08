@@ -72,13 +72,10 @@ public class ListaContactos {
 		int cont;
 		aux = lista;
 		for (cont = 1; cont < size; cont++) {
-			cadena.append( aux.getFecha().getFecha().toString());
-			cadena.append(';').append(aux.getFecha().getHoraFormatted()).append(' ');
-			
+			cadena.append(aux.getFecha().getFechaHora()).append(' ');
 			aux = aux.getSiguiente();
 		}
-		cadena.append(aux.getFecha().getFecha().toString());
-		cadena.append(';').append(aux.getFecha().getHoraFormatted());
+		cadena.append(aux.getFecha().getFechaHora());
 		return cadena.toString();
 	}
 }
