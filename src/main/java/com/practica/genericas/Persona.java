@@ -1,23 +1,48 @@
 package com.practica.genericas;
 
 public class Persona {
-	private String nombre, apellidos, documento, email, direccion, cp;
+	private String nombre, apellidos,documento,email,direccion, cp;
 	FechaHora fechaNacimiento;
+	NombreCompletoYDni nombreCompletoYDni;
+	DireccionesPersona direccionesPersona;
+	
 
 	public Persona() {
 
 	}
 
-	public Persona(String nombre, String apellidos, String documento, String email, String direccion,
+	public Persona(NombreCompletoYDni nombreCompletoYDni, DireccionesPersona direccionesPersona,
 			FechaHora fechaNacimiento) {
 		super();
-		this.nombre = nombre;
-		this.apellidos = apellidos;
-		this.documento = documento;
-		this.email = email;
-		this.direccion = direccion;
+		this.nombreCompletoYDni = nombreCompletoYDni;
+		this.direccionesPersona = direccionesPersona;
 		this.fechaNacimiento = fechaNacimiento;
 	}
+	
+	private class NombreCompletoYDni {
+		private String nombre;
+		private String apellidos;
+		private String documento;
+		
+		public NombreCompletoYDni(String nombre, String apellidos, String documento) {
+			this.nombre = nombre;
+			this.apellidos = apellidos;
+			this.documento = documento;
+		}
+	}
+	private class DireccionesPersona {
+		private String email;
+		private String direccion;
+		
+		public DireccionesPersona(String email, String direccion) {
+			this.email = email;
+			this.direccion = direccion;
+			
+		}
+	}
+	
+	
+	
 
 	public String getNombre() {
 		return nombre;
