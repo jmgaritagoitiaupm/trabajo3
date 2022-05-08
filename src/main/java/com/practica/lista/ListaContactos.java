@@ -80,33 +80,28 @@ public class ListaContactos {
 		cadena += ";" + aux.getFecha().getHoraFormatted();
 		return cadena;
 	}
-
-	public int numPersonasEntreDosInstantes(FechaHora inicio, FechaHora fin) {
-		if (this.size == 0)
-			return 0;
+	
+	public int numElementosEntreDosInstantes(FechaHora inicio, FechaHora fin,boolean tipoElemento) {
+		if(tipoElemento == false) {
+			if (this.size == 0)
+				return 0;
+		}
 		aux = lista;
 		int cont = 0;
 		while (aux != null) {
 			if (aux.getFecha().compareTo(inicio) >= 0 && aux.getFecha().compareTo(fin) <= 0) {
-				cont = aux.getListaCoordenadas().contadorPersonas(cont);
+				if(tipoElemento == false)
+					cont = aux.getListaCoordenadas().contadorPersonas(cont);
+				else
+					cont = aux.contadorCoordenadas(cont);
 			}
 			aux = aux.getSiguiente();
 		}
 		return cont;
+		
 	}
 
-	public int numNodosCoordenadaEntreDosInstantes(FechaHora inicio, FechaHora fin) {
-		aux = lista;
-		int cont = 0;
-		while (aux != null) {
-			if (aux.getFecha().compareTo(inicio) >= 0 && aux.getFecha().compareTo(fin) <= 0) {
-				cont = aux.contadorCoordenadas(cont);
-			}
-			aux = aux.getSiguiente();
-		}
-		return cont;
-	}
-
+	
 	@Override
 	public String toString() {
 		String cadena = "";

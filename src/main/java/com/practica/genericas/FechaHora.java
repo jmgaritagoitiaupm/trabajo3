@@ -12,6 +12,9 @@ public class FechaHora implements Comparable<FechaHora> {
 	public FechaHora(int dia, int mes, int anio, int hora, int minuto) {
 		date = LocalDateTime.of(LocalDate.of(anio, mes, dia), LocalTime.of(hora, minuto));
 	}
+	public FechaHora() {
+		
+		}
 
 	public int getDia() {
 		return date.getDayOfMonth();
@@ -56,6 +59,27 @@ public class FechaHora implements Comparable<FechaHora> {
 	@Override
 	public int compareTo(FechaHora fecha) {
 		return date.compareTo(fecha.date);
+	}
+	public FechaHora parsearFecha(String fecha) {
+		int dia, mes, anio;
+		String[] valores = fecha.split("\\/");
+		dia = Integer.parseInt(valores[0]);
+		mes = Integer.parseInt(valores[1]);
+		anio = Integer.parseInt(valores[2]);
+		return new FechaHora(dia, mes, anio, 0, 0);
+	}
+
+	public FechaHora parsearFecha(String fecha, String hora) {
+		int dia, mes, anio;
+		String[] valores = fecha.split("\\/");
+		dia = Integer.parseInt(valores[0]);
+		mes = Integer.parseInt(valores[1]);
+		anio = Integer.parseInt(valores[2]);
+		int minuto, segundo;
+		valores = hora.split("\\:");
+		minuto = Integer.parseInt(valores[0]);
+		segundo = Integer.parseInt(valores[1]);
+		return new FechaHora(dia, mes, anio, minuto, segundo);
 	}
 
 }
