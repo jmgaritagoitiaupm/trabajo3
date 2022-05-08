@@ -47,6 +47,16 @@ public class NodoPosicion {
 	public void setSiguiente(NodoPosicion siguiente) {
 		this.siguiente = siguiente;
 	}
+
+	public int contadorPersonas(int cont) {
+		NodoPosicion aux = this;
+		while (aux != null) {
+			cont = cont + aux.getNumPersonas();
+			aux = aux.getSiguiente();
+		}
+		return cont;
+	}
+
 	public boolean npEncontrado(Coordenada p) {
 		boolean npEncontrado = false;
 		NodoPosicion next = this;

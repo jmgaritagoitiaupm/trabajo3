@@ -42,4 +42,13 @@ public class NodoTemporal {
 	public void setSiguiente(NodoTemporal siguiente) {
 		this.siguiente = siguiente;
 	}
+	
+	public int contadorCoordenadas(int cont) {
+		NodoPosicion nodo = listaCoordenadas;
+		while (nodo != null) {
+			cont = cont + 1;
+			nodo = nodo.getSiguiente();
+		}
+		return cont;
+	}
 }
