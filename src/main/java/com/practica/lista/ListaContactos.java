@@ -9,42 +9,43 @@ public class ListaContactos {
 	private int size;
 
 	@SuppressWarnings("null")
-	public void insertarNodoTemporal(PosicionPersona p) {
+	public void insertarNodoTemporal(PosicionPersona pers) {
 		NodoTemporal ant = null;
 		aux = lista;
-		while (aux != null && aux.getFecha().compareTo(p.getFechaPosicion()) < 0) {
+		while (aux != null && aux.getFecha().compareTo(pers.getFechaPosicion()) < 0) {
 			ant = aux;
 			aux = aux.getSiguiente();
 		}
-		if (aux != null && aux.getFecha().compareTo(p.getFechaPosicion()) == 0) {
-			aux.nodoTemporalNuevo(p);
+		if (aux != null && aux.getFecha().compareTo(pers.getFechaPosicion()) == 0) {
+			aux.nodoTemporalNuevo(pers);
 		} else {
-			insertarNodoNoEncontrado(p, aux, ant);
+			insertarNodoNoEncontrado(pers, aux, ant);
 			this.size++;
 		}
 	}
 
-	private void insertarNodoNoEncontrado(PosicionPersona p, NodoTemporal aux, NodoTemporal ant) {
-		NodoTemporal nuevo = nodoTemporalNoEncontrado(p);
+	private void insertarNodoNoEncontrado(PosicionPersona pers, NodoTemporal aux, NodoTemporal ant) {
+		NodoTemporal nuevo = nodoTemporalNoEncontrado(pers);
 
-		if (ant != null) {
-			nuevo.setSiguiente(aux);
-			ant.setSiguiente(nuevo);
-		} else {
+		if (ant == null) {
 			nuevo.setSiguiente(lista);
 			lista = nuevo;
+		} else {
+
+			nuevo.setSiguiente(aux);
+			ant.setSiguiente(nuevo);
 		}
 	}
 
-	private NodoTemporal nodoTemporalNoEncontrado(PosicionPersona p) {
+	private NodoTemporal nodoTemporalNoEncontrado(PosicionPersona pers) {
 		aux = new NodoTemporal();
-		aux.setFecha(p.getFechaPosicion());
+		aux.setFecha(pers.getFechaPosicion());
 
 		NodoPosicion npActual = aux.getListaCoordenadas();
 		NodoPosicion npAnt = null;
 
-		if (npActual == null || !npActual.npEncontrado(p.getCoordenada())) {
-			aux.nodoFuncion1(p, aux, npAnt);
+		if (npActual == null || !npActual.npEncontrado(pers.getCoordenada())) {
+			aux.nodoFuncion1(pers, aux, npAnt);
 		}
 		return aux;
 	}
@@ -67,18 +68,17 @@ public class ListaContactos {
 
 	@Override
 	public String toString() {
-		FechaHora fecha;
-		String cadena = "";
+		final StringBuilder cadena = new StringBuilder("");
 		int cont;
 		aux = lista;
 		for (cont = 1; cont < size; cont++) {
-			fecha = aux.getFecha();
-			cadena += fecha.getFecha();
-			cadena += ";" + fecha.getHoraFormatted() + " ";
+			cadena.append( aux.getFecha().getFecha().toString());
+			cadena.append(';').append(aux.getFecha().getHoraFormatted()).append(' ');
+			
 			aux = aux.getSiguiente();
 		}
-		cadena += aux.getFecha().getFecha().toString();
-		cadena += ";" + aux.getFecha().getHoraFormatted();
-		return cadena;
+		cadena.append(aux.getFecha().getFecha().toString());
+		cadena.append(';').append(aux.getFecha().getHoraFormatted());
+		return cadena.toString();
 	}
 }
