@@ -17,40 +17,20 @@ public class FechaHora implements Comparable<FechaHora> {
 		return date.getDayOfMonth();
 	}
 
-	public void setDia(int dia) {
-		date = date.withDayOfMonth(dia);
-	}
-
 	public int getMes() {
 		return date.getMonthValue();
-	}
-
-	public void setMes(int mes) {
-		date = date.withMonth(mes);
 	}
 
 	public int getAnio() {
 		return date.getYear();
 	}
 
-	public void setAnio(int anio) {
-		date = date.withYear(anio);
-	}
-
 	public int getHora() {
 		return date.getHour();
 	}
 
-	public void setHora(int hora) {
-		date = date.withHour(hora);
-	}
-
 	public int getMinuto() {
 		return date.getMinute();
-	}
-
-	public void setMinuto(int minuto) {
-		date = date.withMinute(minuto);
 	}
 
 	public String getHoraFormatted() {
