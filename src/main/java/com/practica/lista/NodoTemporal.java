@@ -73,4 +73,19 @@ public class NodoTemporal {
 		}
 		return cont;
 	}
+	
+	public int contarPersonasEntreInstantes(FechaHora inicio, FechaHora fin, boolean tipoElemento) {
+		NodoTemporal aux = this;
+		int cont = 0;
+		while (aux != null) {
+			if (aux.fecha.compareTo(inicio) >= 0 && aux.fecha.compareTo(fin) <= 0) {
+				if (tipoElemento == false)
+					cont = aux.listaCoordenadas.contadorPersonas(cont);
+				else
+					cont = aux.contadorCoordenadas(cont);
+			}
+			aux = aux.siguiente;
+		}
+		return cont;
+	}
 }

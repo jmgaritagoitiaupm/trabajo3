@@ -57,24 +57,12 @@ public class ListaContactos {
 		FechaHora fecha = lista.getFecha();
 		return fecha.getFecha() + ";" + fecha.getHoraFormatted();
 	}
-	
-	public int numElementosEntreDosInstantes(FechaHora inicio, FechaHora fin,boolean tipoElemento) {
-		if(tipoElemento == false) {
-			if (this.size == 0)
-				return 0;
+
+	public int numElementosEntreDosInstantes(FechaHora inicio, FechaHora fin, boolean tipoElemento) {
+		if (tipoElemento == false && this.size == 0) {
+			return 0;
 		}
-		aux = lista;
-		int cont = 0;
-		while (aux != null) {
-			if (aux.getFecha().compareTo(inicio) >= 0 && aux.getFecha().compareTo(fin) <= 0) {
-				if(tipoElemento == false)
-					cont = aux.getListaCoordenadas().contadorPersonas(cont);
-				else
-					cont = aux.contadorCoordenadas(cont);
-			}
-			aux = aux.getSiguiente();
-		}
-		return cont;
+		return lista.contarPersonasEntreInstantes(inicio, fin, tipoElemento);
 	}
 
 	@Override
@@ -93,5 +81,4 @@ public class ListaContactos {
 		cadena += ";" + aux.getFecha().getHoraFormatted();
 		return cadena;
 	}
-
 }
