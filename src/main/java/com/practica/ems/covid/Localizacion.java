@@ -40,9 +40,8 @@ public class Localizacion {
 		while (it.hasNext()) {
 			cont++;
 			PosicionPersona pp = it.next();
-			FechaHora fechaHora = new FechaHora();
-			fechaHora = fechaHora.parsearFecha(fecha, hora);
-			if (pp.getDocumento().equals(documento) && pp.getFechaPosicion().equals(fechaHora)) {
+			if (pp.getDocumento().equals(documento)
+					&& pp.getFechaPosicion().equals(FechaHora.parsearFecha(fecha, hora))) {
 				return cont;
 			}
 		}
@@ -63,8 +62,7 @@ public class Localizacion {
 		for (int i = 0; i < this.lista.size(); i++) {
 			System.out.printf("%d;%s;", i, lista.get(i).getDocumento());
 			FechaHora fecha = lista.get(i).getFechaPosicion();
-			System.out.printf("%02d/%02d/%04d;%02d:%02d;", fecha.getDia(), fecha.getMes(), fecha.getAnio(),
-					fecha.getHora(), fecha.getMinuto());
+			System.out.printf(fecha.getFechaHora());
 			System.out.printf("%.4f;%.4f\n", lista.get(i).getCoordenada().getLatitud(),
 					lista.get(i).getCoordenada().getLongitud());
 		}
@@ -77,13 +75,10 @@ public class Localizacion {
 			PosicionPersona pp = lista.get(i);
 			cadena += String.format("%s;", pp.getDocumento());
 			FechaHora fecha = pp.getFechaPosicion();
-			cadena += String.format("%02d/%02d/%04d;%02d:%02d;", fecha.getDia(), fecha.getMes(), fecha.getAnio(),
-					fecha.getHora(), fecha.getMinuto());
+			cadena += fecha.getFechaHora();
 			cadena += String.format("%.4f;%.4f\n", pp.getCoordenada().getLatitud(), pp.getCoordenada().getLongitud());
 		}
 		return cadena;
 	}
-
-	
 
 }

@@ -185,14 +185,14 @@ public class ContactosCovid {
 		persona.setEmail(data[4]);
 		persona.setDireccion(data[5]);
 		persona.setCp(data[6]);
-		persona.setFechaNacimiento(fechaHora.parsearFecha(data[7]));
+		persona.setFechaNacimiento(FechaHora.parsearFecha(data[7]));
 		return persona;
 	}
 
 	private PosicionPersona crearPosicionPersona(String[] data) {
 		PosicionPersona posicionPersona = new PosicionPersona();
 		posicionPersona.setDocumento(data[1]);
-		posicionPersona.setFechaPosicion(fechaHora.parsearFecha(data[2], data[3]));
+		posicionPersona.setFechaPosicion(FechaHora.parsearFecha(data[2], data[3]));
 		posicionPersona.setCoordenada(new Coordenada(Float.parseFloat(data[4]), Float.parseFloat(data[5])));
 		return posicionPersona;
 	}
