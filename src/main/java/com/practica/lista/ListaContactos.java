@@ -5,19 +5,20 @@ import com.practica.genericas.PosicionPersona;
 
 public class ListaContactos {
 	private NodoTemporal lista;
+	private NodoTemporal aux;
 	private int size;
 
 	@SuppressWarnings("null")
 	public void insertarNodoTemporal(PosicionPersona p) {
-		NodoTemporal aux = lista, ant = null;
+		NodoTemporal ant = null;
+		aux = lista;
 		while (aux != null && aux.getFecha().compareTo(p.getFechaPosicion()) < 0) {
-				ant = aux;
-				aux = aux.getSiguiente();
+			ant = aux;
+			aux = aux.getSiguiente();
 		}
 		if (aux != null && aux.getFecha().compareTo(p.getFechaPosicion()) == 0) {
 			nodoTemporalNuevo(p, aux);
-		}
-		else {
+		} else {
 			insertarNodoNoEncontrado(p, aux, ant);
 			this.size++;
 		}
@@ -35,18 +36,17 @@ public class ListaContactos {
 		}
 	}
 
-
 	private NodoTemporal nodoTemporalNoEncontrado(PosicionPersona p) {
-		NodoTemporal nuevo = new NodoTemporal();
-		nuevo.setFecha(p.getFechaPosicion());
+		aux = new NodoTemporal();
+		aux.setFecha(p.getFechaPosicion());
 
-		NodoPosicion npActual = nuevo.getListaCoordenadas();
+		NodoPosicion npActual = aux.getListaCoordenadas();
 		NodoPosicion npAnt = null;
 
-		if (npActual == null  || !npActual.npEncontrado(p.getCoordenada())) {
-			nodoFuncion1(p, nuevo, npAnt);
+		if (npActual == null || !npActual.npEncontrado(p.getCoordenada())) {
+			nodoFuncion1(p, aux, npAnt);
 		}
-		return nuevo;
+		return aux;
 	}
 
 	private void nodoTemporalNuevo(PosicionPersona p, NodoTemporal aux) {
@@ -54,13 +54,15 @@ public class ListaContactos {
 		NodoPosicion npAnt = null;
 		while (npActual != null && !npActual.getCoordenada().equals(p.getCoordenada())) {
 
-				npAnt = npActual;
-				npActual = npActual.getSiguiente();
+			npAnt = npActual;
+			npActual = npActual.getSiguiente();
 		}
-		if (npActual != null && npActual.getCoordenada().equals(p.getCoordenada())) npActual.setNumPersonas(npActual.getNumPersonas() + 1);
-		else nodoFuncion1(p, aux, npAnt);
+		if (npActual != null && npActual.getCoordenada().equals(p.getCoordenada()))
+			npActual.setNumPersonas(npActual.getNumPersonas() + 1);
+		else
+			nodoFuncion1(p, aux, npAnt);
 	}
-	
+
 	private void nodoFuncion1(PosicionPersona p, NodoTemporal nuevo, NodoPosicion npAnt) {
 		NodoPosicion npNuevo = new NodoPosicion(p.getCoordenada(), 1, null);
 		if (nuevo.getListaCoordenadas() == null)
@@ -74,7 +76,7 @@ public class ListaContactos {
 	}
 
 	public String getPrimerNodo() {
-		NodoTemporal aux = lista;
+		aux = lista;
 		String cadena = aux.getFecha().getFecha().toString();
 		cadena += ";" + aux.getFecha().getHoraFormatted();
 		return cadena;
@@ -83,7 +85,7 @@ public class ListaContactos {
 	public int numPersonasEntreDosInstantes(FechaHora inicio, FechaHora fin) {
 		if (this.size == 0)
 			return 0;
-		NodoTemporal aux = lista;
+		aux = lista;
 		int cont = 0;
 		while (aux != null) {
 			if (aux.getFecha().compareTo(inicio) >= 0 && aux.getFecha().compareTo(fin) <= 0) {
@@ -103,13 +105,13 @@ public class ListaContactos {
 	}
 
 	public int numNodosCoordenadaEntreDosInstantes(FechaHora inicio, FechaHora fin) {
-		NodoTemporal aux = lista;
+		aux = lista;
 		int cont = 0;
 		while (aux != null) {
 			if (aux.getFecha().compareTo(inicio) >= 0 && aux.getFecha().compareTo(fin) <= 0) {
-				cont = contadorCoordenadas(aux, cont); 
+				cont = contadorCoordenadas(aux, cont);
 			}
-				aux = aux.getSiguiente();
+			aux = aux.getSiguiente();
 		}
 		return cont;
 	}
@@ -127,7 +129,7 @@ public class ListaContactos {
 	public String toString() {
 		String cadena = "";
 		int cont;
-		NodoTemporal aux = lista;
+		aux = lista;
 		for (cont = 1; cont < size; cont++) {
 			cadena += aux.getFecha().getFecha().toString();
 			cadena += ";" + aux.getFecha().getHoraFormatted() + " ";
