@@ -24,13 +24,11 @@ public class ContactosCovid {
 	private Poblacion poblacion;
 	private Localizacion localizacion;
 	private ListaContactos listaContactos;
-	private FechaHora fechaHora;
 
 	public ContactosCovid() {
 		this.poblacion = new Poblacion();
 		this.localizacion = new Localizacion();
 		this.listaContactos = new ListaContactos();
-		this.fechaHora = new FechaHora();
 	}
 
 	public Poblacion getPoblacion() {
@@ -61,7 +59,6 @@ public class ContactosCovid {
 		this.poblacion = new Poblacion();
 		this.localizacion = new Localizacion();
 		this.listaContactos = new ListaContactos();
-		this.fechaHora = new FechaHora();
 	}
 
 	public void loadData(String data, boolean reset) throws EmsInvalidTypeException, EmsInvalidNumberOfDataException,
@@ -178,15 +175,7 @@ public class ContactosCovid {
 	}
 
 	private Persona crearPersona(String[] data) {
-		Persona persona = new Persona();
-		persona.setDocumento(data[1]);
-		persona.setNombre(data[2]);
-		persona.setApellidos(data[3]);
-		persona.setEmail(data[4]);
-		persona.setDireccion(data[5]);
-		persona.setCp(data[6]);
-		persona.setFechaNacimiento(FechaHora.parsearFecha(data[7]));
-		return persona;
+		return new Persona(data[2], data[3], data[1], data[4], data[5], FechaHora.parsearFecha(data[7]), data[6]);
 	}
 
 	private PosicionPersona crearPosicionPersona(String[] data) {
@@ -196,6 +185,4 @@ public class ContactosCovid {
 		posicionPersona.setCoordenada(new Coordenada(Float.parseFloat(data[4]), Float.parseFloat(data[5])));
 		return posicionPersona;
 	}
-
-	
 }
