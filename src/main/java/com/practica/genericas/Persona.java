@@ -1,8 +1,10 @@
 package com.practica.genericas;
 
 public class Persona {
-	private String nombre, apellidos, documento, email, direccion, cp;
+	private String nombre, apellidos,documento,email,direccion, cp;
 	FechaHora fechaNacimiento;
+
+	
 
 	public Persona() {
 
@@ -18,6 +20,8 @@ public class Persona {
 		this.direccion = direccion;
 		this.fechaNacimiento = fechaNacimiento;
 	}
+	
+	
 
 	public String getNombre() {
 		return nombre;
