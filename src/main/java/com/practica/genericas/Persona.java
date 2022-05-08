@@ -3,44 +3,23 @@ package com.practica.genericas;
 public class Persona {
 	private String nombre, apellidos,documento,email,direccion, cp;
 	FechaHora fechaNacimiento;
-	NombreCompletoYDni nombreCompletoYDni;
-	DireccionesPersona direccionesPersona;
+
 	
 
 	public Persona() {
 
 	}
 
-	public Persona(NombreCompletoYDni nombreCompletoYDni, DireccionesPersona direccionesPersona,
+	public Persona(String nombre, String apellidos, String documento, String email, String direccion,
 			FechaHora fechaNacimiento) {
 		super();
-		this.nombreCompletoYDni = nombreCompletoYDni;
-		this.direccionesPersona = direccionesPersona;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.documento = documento;
+		this.email = email;
+		this.direccion = direccion;
 		this.fechaNacimiento = fechaNacimiento;
 	}
-	
-	private class NombreCompletoYDni {
-		private String nombre;
-		private String apellidos;
-		private String documento;
-		
-		public NombreCompletoYDni(String nombre, String apellidos, String documento) {
-			this.nombre = nombre;
-			this.apellidos = apellidos;
-			this.documento = documento;
-		}
-	}
-	private class DireccionesPersona {
-		private String email;
-		private String direccion;
-		
-		public DireccionesPersona(String email, String direccion) {
-			this.email = email;
-			this.direccion = direccion;
-			
-		}
-	}
-	
 	
 	
 
