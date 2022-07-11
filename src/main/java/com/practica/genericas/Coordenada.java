@@ -7,6 +7,7 @@ public class Coordenada {
 	
 	public Coordenada() {
 		super();
+		
 	}
 
 	public Coordenada(float latitud, float longitud) {
@@ -30,6 +31,21 @@ public class Coordenada {
 	public void setLongitud(float longitud) {
 		this.longitud = longitud;
 	}
+		@Override
+	public boolean equals(Object objeto) {
+		if (this == objeto)
+			return true;
+		if (objeto == null)
+			return false;
+		if (getClass() != objeto.getClass())
+			return false;
+		Coordenada other = (Coordenada) objeto;
+		if (Float.floatToIntBits(latitud) != Float.floatToIntBits(other.latitud))
+			return false;
+		if (Float.floatToIntBits(longitud) != Float.floatToIntBits(other.longitud))
+			return false;
+		return true;
+	}
 
 	@Override
 	public int hashCode() {
@@ -40,20 +56,5 @@ public class Coordenada {
 		return result;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Coordenada other = (Coordenada) obj;
-		if (Float.floatToIntBits(latitud) != Float.floatToIntBits(other.latitud))
-			return false;
-		if (Float.floatToIntBits(longitud) != Float.floatToIntBits(other.longitud))
-			return false;
-		return true;
-	}
 	
 }

@@ -1,8 +1,9 @@
 package com.practica.ems.covid;
 
+
 import java.io.BufferedReader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -46,6 +47,8 @@ public class ContactosCovid {
 	public void setLocalizacion(Localizacion localizacion) {
 		this.localizacion = localizacion;
 	}
+	
+	
 
 	public ListaContactos getListaContactos() {
 		return listaContactos;
@@ -55,62 +58,63 @@ public class ContactosCovid {
 		this.listaContactos = listaContactos;
 	}
 
-	public void reseter() {
-		this.poblacion = new Poblacion();
-		this.localizacion = new Localizacion();
-		this.listaContactos = new ListaContactos();
-	}
-
 	public void loadData(String data, boolean reset) throws EmsInvalidTypeException, EmsInvalidNumberOfDataException,
 			EmsDuplicatePersonException, EmsDuplicateLocationException {
+		// borro información anterior
 		if (reset) {
-			this.reseter();
+			this.BorrarInformacion();	
 		}
-		this.dataLoader(data);
-	}
-
-	@SuppressWarnings("resource")
-	public void loadDataFile(String fichero, boolean reset) {
-		BufferedReader br = null;
-		String data;
-		try {
-			br = Files.newBufferedReader(Paths.get(fichero));
-			if (reset) {
-				this.reseter();
-			}
-			while ((data = br.readLine()) != null) {
-				this.dataLoader(data);
-			}
-			if (null != br) {
-				br.close();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void dataLoader(String data) throws EmsInvalidTypeException, EmsInvalidNumberOfDataException,
-			EmsDuplicatePersonException, EmsDuplicateLocationException {
-		String datas[] = dividirEntrada(data.trim());
+		String datas[] = dividirEntrada(data);
 		for (String linea : datas) {
 			String datos[] = this.dividirLineaData(linea);
-			if (datos[0].equals("PERSONA")) {
-				if (datos.length == Constantes.MAX_DATOS_PERSONA) {
-					this.poblacion.addPersona(this.crearPersona(datos));
-				} else
-					throw new EmsInvalidNumberOfDataException("El número de datos para PERSONA es menor de 8");
-			} else if (datos[0].equals("LOCALIZACION")) {
-				if (datos.length == Constantes.MAX_DATOS_LOCALIZACION) {
-					PosicionPersona pp = this.crearPosicionPersona(datos);
-					this.localizacion.addLocalizacion(pp);
-					this.listaContactos.insertarNodoTemporal(pp);
-				} else
-					throw new EmsInvalidNumberOfDataException("El número de datos para LOCALIZACION es menor de 6");
-			} else
+			if (!datos[0].equals("PERSONA") && !datos[0].equals("LOCALIZACION")) {
 				throw new EmsInvalidTypeException();
+			}
+			if (datos[0].equals("PERSONA")) {
+				if (datos.length != Constantes.MAX_DATOS_PERSONA) {
+					throw new EmsInvalidNumberOfDataException("El número de datos para PERSONA es menor de 8");
+				}
+				this.poblacion.addPersona(this.crearPersona(datos));
+			}
+			if (datos[0].equals("LOCALIZACION")) {
+				if (datos.length != Constantes.MAX_DATOS_LOCALIZACION) {
+					throw new EmsInvalidNumberOfDataException("El número de datos para LOCALIZACION es menor de 6");
+				}
+				PosicionPersona pp = this.crearPosicionPersona(datos);
+				this.localizacion.addLocalizacion(pp);
+				this.listaContactos.insertarNodoTemporal(pp);
+			}
 		}
 	}
 
+	public void loadDataFile(String fichero, boolean reset) {
+		File archivo = null;
+		FileReader fr = null;
+		BufferedReader br = null;
+		String datas[] = null, data = null;
+		try {
+			archivo = new File(fichero);
+			fr = new FileReader(archivo);
+			br = new BufferedReader(fr);
+			while((data = br.readLine()) != null) {
+				loadData(data, reset);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cerrarFichero(fr);
+		}		
+	}
+	
+	private void cerrarFichero(FileReader fr) {
+		try {
+			if (null != fr) {
+				fr.close();
+			}
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
+	}
 	public int findPersona(String documento) throws EmsPersonNotFoundException {
 		int pos;
 		try {
@@ -167,25 +171,32 @@ public class ContactosCovid {
 	}
 
 	private String[] dividirEntrada(String input) {
-		return input.split("\\n");
+		String cadenas[] = input.split("\\n");
+		return cadenas;
 	}
 
 	private String[] dividirLineaData(String data) {
-		return data.split("\\;");
+		String cadenas[] = data.split("\\;");
+		return cadenas;
 	}
 
 	private Persona crearPersona(String[] data) {
-		Persona nuevaPersona = new Persona(data[2], data[3], data[1], data[4], data[5],
-				FechaHora.parsearFecha(data[7]));
-		nuevaPersona.setCp(data[6]);
-		return nuevaPersona;
+		Persona persona = new Persona(data[2], data[3], data[1], data[4], data[5], FechaHora.parsearFecha(data[7]));
+		persona.setCp(data[6]);
+		return persona;
 	}
 
 	private PosicionPersona crearPosicionPersona(String[] data) {
-		PosicionPersona posicionPersona = new PosicionPersona();
-		posicionPersona.setDocumento(data[1]);
-		posicionPersona.setFechaPosicion(FechaHora.parsearFecha(data[2], data[3]));
-		posicionPersona.setCoordenada(new Coordenada(Float.parseFloat(data[4]), Float.parseFloat(data[5])));
+		Float latitud = Float.parseFloat(data[4]);
+		Float longitud = Float.parseFloat(data[5]);
+		PosicionPersona posicionPersona = new PosicionPersona(new Coordenada(latitud,longitud),data[1],FechaHora.parsearFecha(data[2],data[3]));
 		return posicionPersona;
 	}
+
+	public void BorrarInformacion () {
+		this.poblacion = new Poblacion();
+		this.localizacion = new Localizacion();
+		this.listaContactos = new ListaContactos();
+	}
+	
 }

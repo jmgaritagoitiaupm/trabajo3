@@ -1,5 +1,5 @@
-[![BCH compliance](https://bettercodehub.com/edge/badge/ETSISI-EMS/ems2022_lab_3_mantenibilidad_iwt31-grupoiwt31_01?branch=main&token=7ce5461cab402fee729e6b256ae79e78bf70a7f9)](https://bettercodehub.com/)
-:point_right: PUT YOUR SCOREBOARD BADGE HERE
+:point_right: [![BCH compliance](https://bettercodehub.com/edge/badge/ETSISI-EMS/ems2022_lab_3_mantenibilidad_ef-victorchumillashernando?branch=main&token=5cef1dcf3f51f4683a4164688c11695e3828047b)](https://bettercodehub.com/)
+:point_right: [![CI](https://github.com/ETSISI-EMS/ems2022_lab_3_mantenibilidad_ef-victorchumillashernando/actions/workflows/workflow.yml/badge.svg)](https://github.com/ETSISI-EMS/ems2022_lab_3_mantenibilidad_ef-victorchumillashernando/actions/workflows/workflow.yml)
 
 # EMS-lab3 Maintainability
 
