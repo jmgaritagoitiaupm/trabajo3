@@ -1,5 +1,5 @@
-:point_right: [![BCH compliance](https://bettercodehub.com/edge/badge/ETSISI-EMS/ems2022_lab_3_mantenibilidad_ef-victorchumillashernando?branch=main&token=5cef1dcf3f51f4683a4164688c11695e3828047b)](https://bettercodehub.com/)
-:point_right: [![CI](https://github.com/ETSISI-EMS/ems2022_lab_3_mantenibilidad_ef-victorchumillashernando/actions/workflows/workflow.yml/badge.svg)](https://github.com/ETSISI-EMS/ems2022_lab_3_mantenibilidad_ef-victorchumillashernando/actions/workflows/workflow.yml)
+![flujo de trabajo de ejemplo](https://github.com/ETSISI-EMS/ems2022_lab_3_mantenibilidad_ef-anagaupm/actions/workflows/workflow.yml/badge.svg)
+[![BCH compliance](https://bettercodehub.com/edge/badge/ETSISI-EMS/ems2022_lab_3_mantenibilidad_ef-anagaupm?branch=main&token=26768369fcc57abc2e9d127b5b4c7b7a834280d6)](https://bettercodehub.com/)
 
 # EMS-lab3 Maintainability
 

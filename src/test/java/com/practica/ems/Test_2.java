@@ -1,9 +1,7 @@
 package com.practica.ems;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -86,7 +84,6 @@ public class Test_2 {
 			Assertions.assertEquals(contactosCovid.findPersona("12345678J"), 3);
 		} catch (EmsInvalidTypeException | EmsInvalidNumberOfDataException | EmsDuplicatePersonException
 				| EmsDuplicateLocationException e) {
-			
 			System.out.println("Error al cargar una persona valida");
 		}
 	}

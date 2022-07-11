@@ -20,8 +20,6 @@ public class Persona {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
-
-
 	public String getNombre() {
 		return nombre;
 	}
@@ -80,7 +78,6 @@ public class Persona {
 
 	@Override
 	public String toString() {
-		FechaHora fecha = getFechaNacimiento();
 		String cadena = "";
 		// Documento
 		cadena += String.format("%s;", getDocumento());
@@ -91,8 +88,7 @@ public class Persona {
         // Direccion y código postal
 		cadena += String.format("%s,%s;", getDireccion(), getCp());
         // Fecha de nacimiento
-		cadena+=FechaHora.desparsearFecha(fecha);
-
+		cadena+=getFechaNacimiento().aCadenaFecha()+"\n";
 		return cadena;
 	}
 }

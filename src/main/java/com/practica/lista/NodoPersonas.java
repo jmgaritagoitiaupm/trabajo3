@@ -6,7 +6,6 @@ public class NodoPersonas {
 	
 	public NodoPersonas() {
 		super();
-		
 	}
 	public NodoPersonas(String documento, NodoPersonas siguiente) {
 		super();

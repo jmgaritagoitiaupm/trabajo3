@@ -1,9 +1,7 @@
 package com.practica.genericas;
 
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Locale;
 
 public class FechaHora implements Comparable<FechaHora>{
 	public class Fecha {
@@ -14,12 +12,6 @@ public class FechaHora implements Comparable<FechaHora>{
 			this.dia = dia;
 			this.mes = mes;
 			this.anio = anio;
-		}
-		public Fecha(){
-			super();
-			this.dia=0;
-			this.mes=0;
-			this.anio=0;
 		}
 
 		public int getDia() {
@@ -50,49 +42,42 @@ public class FechaHora implements Comparable<FechaHora>{
 		public String toString() {
 			String cadena = String.format("%2d/%02d/%4d",dia,mes,anio);
 			return cadena;
-		}
-		
-		
-
+		}	
 	}
+		
+		public class Hora {
+			private int hora, minuto;
 
-	public class Hora {
-		private int hora, minuto;
+			public Hora(int hora, int minuto) {
+				super();
+				this.hora = hora;
+				this.minuto = minuto;
+			}
 
-		public Hora(int hora, int minuto) {
-			super();
-			this.hora = hora;
-			this.minuto = minuto;
-		}
-		public Hora(){
-			super();
-			this.hora=0;
-			this.minuto=0;
-		}
+			public int getHora() {
+				return hora;
+			}
 
-		public int getHora() {
-			return hora;
-		}
+			public void setHora(int hora) {
+				this.hora = hora;
+			}
 
-		public void setHora(int hora) {
-			this.hora = hora;
-		}
+			public int getMinuto() {
+				return minuto;
+			}
 
-		public int getMinuto() {
-			return minuto;
-		}
+			public void setMinuto(int minuto) {
+				this.minuto = minuto;
+			}
 
-		public void setMinuto(int minuto) {
-			this.minuto = minuto;
+			@Override
+			public String toString() {
+				return String.format("%02d:%02d", hora,minuto);
+			}
 		}
-
-		@Override
-		public String toString() {
-			return String.format("%02d:%02d", hora,minuto);
-		}
+			
 		
 
-	}
 
 	Fecha fecha;
 	Hora hora;
@@ -107,10 +92,7 @@ public class FechaHora implements Comparable<FechaHora>{
 		this.fecha = new Fecha(dia, mes, anio);
 		this.hora = new Hora(hora, minuto);
 	}
-	public FechaHora(){
-		this.fecha=new Fecha();
-		this.hora=new Hora();
-	}
+
 	public Fecha getFecha() {
 		return fecha;
 	}
@@ -161,7 +143,47 @@ public class FechaHora implements Comparable<FechaHora>{
 		return dateTime1.compareTo(dateTime2);
 	}
 	
-		public static FechaHora parsearFecha (String fecha) {
+	public void imprimeFechaHora() {
+	       System.out.printf("%02d/%02d/%04d;%02d:%02d;", 
+	        		getFecha().getDia(), 
+	        		getFecha().getMes(), 
+	        		getFecha().getAnio(),
+	        		getHora().getHora(),
+	        		getHora().getMinuto());
+		
+	}
+	
+	public void imprimeFecha() {
+	       System.out.printf("%02d/%02d/%04d;", 
+	        		getFecha().getDia(), 
+	        		getFecha().getMes(), 
+	        		getFecha().getAnio());
+		
+	}
+
+	public String aCadenaFechaHora() {
+		return String.format("%02d/%02d/%04d;%02d:%02d;", 
+        		getFecha().getDia(), 
+        		getFecha().getMes(), 
+        		getFecha().getAnio(),
+        		getHora().getHora(),
+        		getHora().getMinuto());
+	}
+
+	public String aCadenaFecha() {
+		return String.format("%02d/%02d/%04d;", 
+        		getFecha().getDia(), 
+        		getFecha().getMes(), 
+        		getFecha().getAnio());
+	}
+	
+	public String toStrigLista() {
+		String cadena =getFecha().toString();
+		cadena += ";" +  getHora().toString();
+		return cadena;
+	}
+	
+	public static FechaHora parsearFecha (String fecha) {
 		int dia, mes, anio;
 		String[] valores = fecha.split("\\/");
 		dia = Integer.parseInt(valores[0]);
@@ -173,44 +195,18 @@ public class FechaHora implements Comparable<FechaHora>{
 	
 	public static FechaHora parsearFecha (String fecha, String hora) {
 		int dia, mes, anio;
-		FechaHora aux= parsearFecha(fecha);
-		Fecha fechaaux= aux.getFecha();
-		dia=fechaaux.getDia() ;
-		mes=fechaaux.getMes();
-		anio=fechaaux.getAnio();
+		String[] valores = fecha.split("\\/");
+		dia = Integer.parseInt(valores[0]);
+		mes = Integer.parseInt(valores[1]);
+		anio = Integer.parseInt(valores[2]);
 		int minuto, segundo;
-		String[] valores = hora.split("\\:");
+		valores = hora.split("\\:");
 		minuto = Integer.parseInt(valores[0]);
 		segundo = Integer.parseInt(valores[1]);
 		FechaHora fechaHora = new FechaHora(dia, mes, anio, minuto, segundo);
-		return fechaHora ;
+		return fechaHora;
 	}
 	
-	public static String desparsearFechaHora(FechaHora fecha) {
-		String cadena=FechaHora.desparsearFecha(fecha);
-		cadena+=String.format("%02d:%02d;",
-				fecha.getHora().getHora(),
-				fecha.getHora().getMinuto());
-		return cadena;
-		
-	}
-	public static String desparsearFecha(FechaHora fecha) {
-		String cadena="";
-		cadena=String.format("%02d/%02d/%04d;", 
-				fecha.getFecha().getDia(), 
-				fecha.getFecha().getMes(), 
-				fecha.getFecha().getAnio());
-		return cadena;
-		
-	}
-public boolean compararfecha(FechaHora inicio, FechaHora fin) {
-		
-		return (this.compareTo(inicio)>=0 && this.compareTo(fin)<=0);
-	}
-public static String escribir(FechaHora fecha) {
-	String cadena="";
-	cadena=fecha.getFecha().toString();
-	cadena+= ";" +  fecha.getHora().toString();
-	return cadena;
-}
+	
+	
 }

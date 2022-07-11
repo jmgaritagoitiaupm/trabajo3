@@ -22,7 +22,7 @@ public class Test_1 {
 
 	@BeforeEach
 	void setUp() {
-		String test_data_str = "PERSONA;12121212R;Jessica;Diaz;jessica.diaz@ems.com;La calle de Jessica, 33;28033;25/01/1980\n"
+		String testdatastr = "PERSONA;12121212R;Jessica;Diaz;jessica.diaz@ems.com;La calle de Jessica, 33;28033;25/01/1980\n"
 				+ "PERSONA;98765432J;Angel;Panizo;angel.panizo@ems.com;La calle de Angel, 46;28871;12/01/1995\n"
 				+ "LOCALIZACION;12121212R;25/10/2021;23:41;91.3970;12.1687\n"
 				+ "LOCALIZACION;12121212R;25/10/2021;23:45;91.3970;12.1695\n"
@@ -31,10 +31,10 @@ public class Test_1 {
 		contactosCovid = new ContactosCovid();
 
 		try {
-			contactosCovid.loadData(test_data_str, false);
+			contactosCovid.loadData(testdatastr, false);
 		} catch (EmsInvalidTypeException | EmsInvalidNumberOfDataException | EmsDuplicatePersonException
 				| EmsDuplicateLocationException e) {
-			
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -101,7 +101,7 @@ public class Test_1 {
 			Assertions.assertEquals(contactosCovid.findPersona("12345678J"), 3);
 		} catch (EmsInvalidTypeException | EmsInvalidNumberOfDataException | EmsDuplicatePersonException
 				| EmsDuplicateLocationException e) {
-			
+			// TODO Auto-generated catch block
 			System.out.println("Error al cargar una persona valida");
 		}
 	}
@@ -114,7 +114,7 @@ public class Test_1 {
 			Assertions.assertEquals(contactosCovid.findLocalizacion("12345678J", "16/05/2021", "01:45"), 5);
 		} catch (EmsInvalidTypeException | EmsInvalidNumberOfDataException | EmsDuplicatePersonException
 				| EmsDuplicateLocationException e) {
-			
+			// TODO Auto-generated catch block
 			System.out.println("Error al cargar una localizacion valida");
 		}
 	}

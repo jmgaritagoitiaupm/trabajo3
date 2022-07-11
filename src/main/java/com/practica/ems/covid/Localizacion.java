@@ -27,8 +27,7 @@ public class Localizacion {
 
 	public void addLocalizacion (PosicionPersona p) throws EmsDuplicateLocationException {
 		try {
-			String data[]=PosicionPersona.getData(p);
-			findLocalizacion(data[0], data[1],data[2] );
+			findLocalizacion(p.getDocumento(), p.getFechaPosicion().getFecha().toString(),p.getFechaPosicion().getHora().toString() );
 			throw new EmsDuplicateLocationException();
 		}catch(EmsLocalizationNotFoundException e) {
 			lista.add(p);
@@ -41,7 +40,7 @@ public class Localizacion {
 	    while(it.hasNext()) {
 	    	cont++;
 	    	PosicionPersona pp = it.next();
-	    	FechaHora fechaHora = FechaHora.parsearFecha(fecha, hora) ;
+	    	FechaHora fechaHora = FechaHora.parsearFecha(fecha, hora);
 	    	if(pp.getDocumento().equals(documento) && 
 	    	   pp.getFechaPosicion().equals(fechaHora)) {
 	    		return cont;
@@ -64,17 +63,30 @@ public class Localizacion {
 	    
 	}
 	
-	
+	void printLocalizacion() {    
+	    for(int i = 0; i < this.lista.size(); i++) {
+	        System.out.printf("%d;%s;", i, lista.get(i).getDocumento());
+	        FechaHora fecha = lista.get(i).getFechaPosicion();        
+	        fecha.imprimeFechaHora();
+	        System.out.printf("%.4f;%.4f\n", lista.get(i).getCoordenada().getLatitud(), 
+	        		lista.get(i).getCoordenada().getLongitud());
+	    }
+	}
 
 	@Override
 	public String toString() {
 		String cadena = "";
 		for(int i = 0; i < this.lista.size(); i++) {
 			PosicionPersona pp = lista.get(i);
-	       cadena+=pp.toString();
+	        cadena += String.format("%s;", pp.getDocumento());
+	        FechaHora fecha = pp.getFechaPosicion();        
+	        cadena+= fecha.aCadenaFechaHora();
+	        cadena+=String.format("%.4f;%.4f\n", pp.getCoordenada().getLatitud(), 
+	        		pp.getCoordenada().getLongitud());
 	    }
 		
-		return cadena;	
+		return cadena;		
 	}
+	
 	
 }

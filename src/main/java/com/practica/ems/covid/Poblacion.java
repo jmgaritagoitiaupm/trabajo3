@@ -62,7 +62,22 @@ public class Poblacion {
 		throw new EmsPersonNotFoundException();
 	}
 	
-
+	public void printPoblacion() {   
+		 
+	    for(int i = 0; i < lista.size(); i++) {	    	
+	    	FechaHora fecha = lista.get(i).getFechaNacimiento();
+	        // Documento	    	
+	        System.out.printf("%d;%s;", i, lista.get(i).getDocumento());
+	        // nombre y apellidos	              
+	        System.out.printf("%s,%s;",lista.get(i).getApellidos(), lista.get(i).getNombre());	        
+	        // correo electrónico
+	        System.out.printf("%s;", lista.get(i).getEmail());
+	        // Códifo postal
+	        System.out.printf("%s,%s;", lista.get(i).getDireccion(), lista.get(i).getCp());	        
+	        // Fecha de nacimiento
+	        fecha.imprimeFecha();
+	    }
+	}
 
 	@Override
 	public String toString() {
@@ -78,7 +93,7 @@ public class Poblacion {
 	        // Direccion y código postal
 	        cadena+=String.format("%s,%s;", lista.get(i).getDireccion(), lista.get(i).getCp());	        
 	        // Fecha de nacimiento
-	        cadena+=FechaHora.desparsearFecha(fecha);
+	        cadena+=fecha.aCadenaFecha()+"\n";
 		}
 		return cadena;
 	}
